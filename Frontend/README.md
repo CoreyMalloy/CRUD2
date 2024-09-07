@@ -52,11 +52,48 @@ const openCreateModal = () => {
 The same thing happens with when it is opened, the variable is set to true.
 
 ```JavaScript
-
+<ContactList contacts={contacts} updateContact={openEditModal} updateCallback={onUpdate}/>
+      <button onClick={openCreateModal}>Create New Contact</button>
+      { isModalOpen && <div className="modal">
+        <div className="modal-content">
+          <span className="close" onClick={closeModal}>&times;</span>
+          <ContactForm existingContact={currentContact} updateCallback={onUpdate}/>
+        </div>
+      </div>
+      }
 ```
 
+This is the html that is responsible for the functionality of this process
 
+The button, once pressed, opens up the modal available for adding a new contact.
+
+The next few lines defines what exactly is on the modal once it is open, so there will be a button to close the modal that runs through the arrow function "closeModal" and also the rest of the contact form in order to write the information
 
 ## Contact Form
+
+The contact form is another file, this will list out the style of what the form will look like. So what exactly is retrieving our information
+
+```JavaScript
+const updating = Object.entries(existingContact).length !== 0
+```
+After creating the useStates for this file (first and last name and email) our goal is to set the standards for updating as opposed to creating a new contact. So if the length of the contact is not already 0, then it is updating.
+
+```JavaScript
+const data = {
+      firstName,
+      lastName,
+      email
+    }
+```
+
+This section that is assigned as 'data' is used to create the structure of the contact.
+
+```JavaScript
+const url = "http://127.0.0.1:5000/" + (updating ? `update_contact/${existingContact.id}` : "create_contact")
+```
+To get the url needed to apply the routes in "main.py", there needs to be this type of statement. This is basically an if statement of sorts that says, the base URL will be the first section in quotes, but after that, if it is updating then the url will end in "update_contact/${existingContact.id}", and if not, it will bring you to the new contact page
+
+
+
 
 ## Contact List
