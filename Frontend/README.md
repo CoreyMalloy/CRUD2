@@ -33,6 +33,27 @@ const fetchContacts = async () => {
 
 This arrow function is whats being called in the 'useEffect' function. This function makes a call to the URL listed above, which is the storage space for our contacts, and saves them as a json file in the variable data
 
+```JavaScript
+const closeModal = () => {
+    setIsModalOpen(false)
+    setCurrentContact({})
+  }
+```
+
+The next arrow function is used to define the process on which the update modal is closed. So once this modal is closed, the boolean variable turns to false
+
+
+```JavaScript
+const openCreateModal = () => {
+    if (!isModalOpen) setIsModalOpen(true)
+  }
+```
+
+The same thing happens with when it is opened, the variable is set to true.
+
+```JavaScript
+
+```
 
 
 
