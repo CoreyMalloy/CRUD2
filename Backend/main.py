@@ -24,7 +24,7 @@ def create_contact():
   except Exception as e:
     return jsonify({"mesasge": str(e)}), 400
   
-  return jsonify({"mesaage": "User Created"})
+  return jsonify({"message": "User Created"})
 
 @app.route('/update_contact/<int:user_id>', methods = ["PATCH"])
 def update_contact(user_id):
