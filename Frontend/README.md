@@ -76,6 +76,7 @@ The contact form is another file, this will list out the style of what the form 
 ```JavaScript
 const updating = Object.entries(existingContact).length !== 0
 ```
+
 After creating the useStates for this file (first and last name and email) our goal is to set the standards for updating as opposed to creating a new contact. So if the length of the contact is not already 0, then it is updating.
 
 ```JavaScript
@@ -93,7 +94,58 @@ const url = "http://127.0.0.1:5000/" + (updating ? `update_contact/${existingCon
 ```
 To get the url needed to apply the routes in "main.py", there needs to be this type of statement. This is basically an if statement of sorts that says, the base URL will be the first section in quotes, but after that, if it is updating then the url will end in "update_contact/${existingContact.id}", and if not, it will bring you to the new contact page
 
+```JavaScript
+const options = {
+      method: updating ? "PATCH" : "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }
+```
+
+This fuction sets all of the  necessary information that the fetch request might need. It will determine if it is updating or not and also let the fetch request know what type of file is being returned. the body section will set the type of content in the file to json
+
+```JavaScript
+const response = await fetch(url, options)
+    if (response.status !== 201 && response.status !== 200) {
+      const data = await response.json()
+      alert(data.message)
+    } else{
+      updateCallback()
+    }
+```
+
+This is the fetch call that gets the url and the options and puts them together. It checks to make sure it does not give back an error message and if it does not then it puts it in the 
 
 
 
 ## Contact List
+
+```JavaScript
+const ContactList = ({contacts, updateContact, updateCallback }) =>
+```
+
+This line creates the arrow function of "ContactList" with the parameters of the three inside.
+
+```JavaScript
+const onDelete = async (id) => {
+    try {
+      const options = {
+        method: "DELETE"
+      }
+      const response = await fetch(`http://127.0.0.1:5000/delete_contact/${id}`, options)
+      if (response.status === 200) {
+        updateCallback()
+      } else {
+        console.error("Failed to delete")
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
+```
+
+This arrow function passes through the id that is assigned to each individual contact. It assigns the method of the request as the delete method and then goes to the appropriate endpoint.
+
+It checks to make sure that it does not return an error and then updates the call back. 
