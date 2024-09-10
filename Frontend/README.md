@@ -149,3 +149,19 @@ const onDelete = async (id) => {
 This arrow function passes through the id that is assigned to each individual contact. It assigns the method of the request as the delete method and then goes to the appropriate endpoint.
 
 It checks to make sure that it does not return an error and then updates the call back. 
+
+```JavaScript
+{contacts?.map((contact) => (
+          <tr key={contact.id}>
+            <td>{contact.firstName}</td>
+            <td>{contact.lastName}</td>
+            <td>{contact.email}</td>
+            <td>
+              <button onClick={() => updateContact(contact)}>Update</button>
+              <button onClick={() => onDelete(contact.id)}>Delete</button>
+            </td>
+          </tr>
+        ))}
+```
+
+This arrow function iterates through the array "contacts" and gives the instructions on how to transform it into the output
